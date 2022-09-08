@@ -9,18 +9,46 @@ To test your program write a separate .cpp file and #include
 split.h.  **Do NOT add main() to this file**.  When you submit
 the function below should be the only one in this file.
 */
-
+#include "iostream"
+using namespace std;
 #include "split.h"
 
 /* Add a prototype for a helper function here if you need */
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+if(in != nullptr){
+    Node* temp = in->next;
+    if(in->value % 2 == 1){ //odd value
+      odds = in;
+      in->next = nullptr;
+      split(temp,odds->next,evens);
+    }
+    if(in->value % 2 == 0){ 
+      evens = in;
+      in->next = nullptr;
+      split(temp,odds,evens->next);
+    }
+}
 
+/*
+DOESNT WORK, CORRECT LOGIC, WRONG INTURPRITATION
+if(in == nullptr){
+odds->next = nullptr;
+evens->next = nullptr;
+}
+else if(in->value % 2 == 1){ //odd value
+//Node*& temp = in;
+//temp->next = nullptr;
+//odds = temp;  
+odds->next = in; 
+split(in->next,odds->next,evens);
+}
+else if(in->value % 2 == 0){ //even value
+evens->next = in; 
+split(in->next,odds,evens->next);
+}
+*/
 }
 
 /* If you needed a helper function, write it here */
-
-// WRITE YOUR CODE HERE
